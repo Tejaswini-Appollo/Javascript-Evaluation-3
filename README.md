@@ -1,5 +1,57 @@
 # Javascript Evaluation 3
 
+## 1. this inside an arrow function
+``` Javascript
+In the regular function, a function always defines its this value. 
+Arrow functions treat this keyword differently. They don’t define their own context since it doesn’t have its own this context. They inherit that from the parent scope whenever you call this.
+
+Example:
+
+const parent1 = {
+    name: "Sinamika",
+    introduce: () => {
+        return `${this.name} is my mom`;
+    }
+}
+
+console.log(parent1.introduce());
+
+const parent2 = {
+    name: "Sinamika",
+    introduce: function() {
+        return `${this.name} is my mom`;
+    }
+}
+
+console.log(parent2.introduce());
+```
+## Output
+``` Javascript
+undefined is my mom
+Sinamika is my mom
+```
+
+## 2. String Permutation
+``` Javascript
+const stringPermutations = str => {
+  if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
+  return str
+    .split('')
+    .reduce(
+      (acc, letter, i) =>
+        acc.concat(stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)),
+      []
+    );
+};
+
+console.log(stringPermutations('abc'));
+```
+## Output
+``` Javascript
+[ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
+```
+
+## 3. 
 ## 4. Examine the code
 ``` Javascript
 for(var i = 0; i < 10; i++) {
