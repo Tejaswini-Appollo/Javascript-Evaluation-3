@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="button">Click me</button>
+    <script>
+      let button = document.getElementById("button");
+      let callback = () => {
+        console.log(this); // it gives the window object.
+      };
+
+      button.addEventListener("click", callback);
+    </script>
+  </body>
+</html>

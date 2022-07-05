@@ -51,7 +51,50 @@ console.log(stringPermutations('abc'));
 [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
 ```
 
-## 3. 
+## 3. Classic and arrow function are used as callbacks
+``` Javascript
+CLASSIC FUNCTIONS AS CALLBACK
+
+function myDisplayer(something) {
+  return `The sum calculation is ${something}.`;
+}
+
+function myCalculator(num1, num2, myCallback) {
+  let sum = num1 + num2;
+  console.log(myCallback(sum));
+}
+
+myCalculator(5, 5, myDisplayer);
+
+ARROW FUNCTIONS AS EVENT CALLBACK
+
+Example:
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="button">Click me</button>
+    <script>
+      let button = document.getElementById("button");
+      let callback = () => {
+        console.log(this); // it gives the window object.
+      };
+
+      button.addEventListener("click", callback);
+    </script>
+  </body>
+</html>
+```
+## Output
+``` Javascript
+The sum calculation is 10.
+
+Window object 
+```
+
 ## 4. Examine the code
 ``` Javascript
 for(var i = 0; i < 10; i++) {
