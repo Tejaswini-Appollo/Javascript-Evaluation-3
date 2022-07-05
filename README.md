@@ -1,5 +1,29 @@
 # Javascript Evaluation 3
 
+## 4. Examine the code
+``` Javascript
+for(var i = 0; i < 10; i++) {
+    let k = i;
+    setTimeout(function() {
+        console.log(k);
+        k = k + 1;
+    }, 10);
+}
+```
+## Output
+``` Javascript
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
 ## 5. Class instance method and static method 
 ``` Javascript
 Instance method:
@@ -27,11 +51,38 @@ let object = new Sample;
 console.log(object.method1());
 console.log(Sample.method2());
 ```
-
 ## Output
 ``` Javascript
 This will return method 1
 This will return method 2
+```
+
+## 6. this inside a class method
+``` Javascript
+When using this inside a method of a class, it points to the current object.
+
+Example:
+
+class Car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+
+    age(currentYear) {
+        return currentYear - this.year;
+    }
+}
+
+let date = new Date();
+let year = date.getFullYear();
+
+let car = new Car("Ford", 2014);
+console.log(car.age(year));
+```
+## OUtput
+``` Javascript
+8
 ```
 
 ## 7. Execution order
@@ -50,6 +101,97 @@ ex()
 [Function: ex]
 [Function: ex2]
 [Function: ex1]
+```
+
+## 8. Event loop
+``` Javascript
+setTimeout() is an example for executing event loop 
+There are two arguments for event loop
+1. A meesage to be added to the queue
+2. The time delay
+
+If there are no messages in the queue and the stack is empty, 
+the message is processed after the time delay. But if there are 
+messages in the queue, the setTimeout() will have to wait for other
+messages to get processed.
+
+Example
+
+const seconds = new Date().getSeconds();
+
+setTimeout(function() {
+  console.log(`Ran after ${new Date().getSeconds() - seconds} seconds`);
+}, 500)
+
+while (true) {
+  if (new Date().getSeconds() - seconds >= 2) {
+    console.log("Good, looped for 2 seconds")
+    break;
+  }
+}
+```
+## Output
+``` Javascript
+Good, looped for 2 seconds
+Ran after 2 seconds
+```
+
+## 9. Custom event listener
+``` Javascript
+We can create a custom event using Event and CustomEvent constructor
+
+To create using the Event constructor:
+
+1. We create an event using the Event constructor.
+2. We listen to this event using the addEventListener() method.
+3. We trigger or dispatch the event using element.dispatchEvent(eventName) method.
+4. A custom Event named start has now been created.
+
+Example:
+
+let x = 5;
+const event1 = new Event("hello");
+  
+document.addEventListener('hello', ()=>{
+    console.log("Start event triggered")
+});
+  
+if(x == 5){
+    document.dispatchEvent(event1);
+}
+
+To create using the CustomEvent constructor:
+
+1. We create a custom event using the CustomEvent constructor.
+2. This takes two arguments, the first is the name of the event 
+and the second is an object that contains the data. 
+3. The property name inside the object name should be named 
+detail otherwise it won’t work.
+4. We create a listener for this event.
+5. We trigger or dispatch the event.
+6. A custom event that contains data has been created.
+
+Example:
+
+let y = 5;
+const event = new CustomEvent("start", {
+    detail: {
+      platform : "GeeksforGeeks"
+    }
+});
+  
+document.addEventListener('start', (e) => {
+    console.log(`Start event triggered on platform ${e.detail.platform}`);
+})
+  
+if (y == 5) {
+    document.dispatchEvent(event);
+}
+```
+## Output
+``` Javascript
+Start event triggered
+Start event triggered on platform GeeksforGeeks
 ```
 
 ## 10. super and constructor keywords in class

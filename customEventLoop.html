@@ -1,0 +1,32 @@
+<html>
+<body>
+<script>
+  let x = 5;
+  const event1 = new Event("hello");
+  
+  document.addEventListener('hello', ()=>{
+    console.log("Start event triggered")
+  });
+  
+  if(x == 5){
+    document.dispatchEvent(event1);
+  }
+
+  let y = 5;
+  const event = new CustomEvent("start", {
+    detail: {
+      platform : "GeeksforGeeks"
+    }
+  });
+  
+  document.addEventListener('start', (e) => {
+    console.log(`Start event triggered on platform ${e.detail.platform}`);
+  })
+  
+  if (y == 5) {
+    document.dispatchEvent(event);
+  }
+
+</script>
+</body>
+</html> 
